@@ -46,7 +46,7 @@ namespace BasicRayTrace.tracer
             {
                 for (int y = 0; y < height; y++)
                 {
-                    Ray ray = new Ray(new Vector3(x*0.1f, y*0.1f, 0.1f), new Vector3(x, y, 1000.0f));
+                    Ray ray = new Ray(new Vector3(x*0.1f, y*0.1f, 0.1f), new Vector3(x*0.1f, y*0.1f, 1000.0f));
 
                     HashSet<RayCollision> rcs = new HashSet<RayCollision>();
 
