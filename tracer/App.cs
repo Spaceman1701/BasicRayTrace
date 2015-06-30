@@ -20,8 +20,8 @@ namespace BasicRayTrace.tracer
         {
             RayTracer rt = new RayTracer(width, height, aspect);
 
-            rt.AddObject(new Sphere(new Math.Vector3(64.0f, 64.0f, 100.0f), 5.0f, new Math.Vector3(1, 0, 1)));
-            rt.AddObject(new Sphere(new Math.Vector3(50.0f, 0.0f, 100.0f), 5.0f, new Math.Vector3(0, 1, 1)));
+            rt.AddObject(new Sphere(new Math.Vector3(50, 50.0f, 3.0f), 2.0f, new Math.Vector3(1, 0, 1)));
+            rt.AddObject(new Sphere(new Math.Vector3(45.0f, 45.0f, 40.0f), 8.0f, new Math.Vector3(0, 1, 1)));
 
             OutputData output = rt.RunBasic();
 

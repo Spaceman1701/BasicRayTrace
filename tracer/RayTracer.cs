@@ -46,7 +46,10 @@ namespace BasicRayTrace.tracer
             {
                 for (int y = 0; y < height; y++)
                 {
-                    Ray ray = new Ray(new Vector3(x*0.1f, y*0.1f, 0.1f), new Vector3(x*0.1f, y*0.1f, 1000.0f));
+                    float outX = x * (0.1f / 1000.0f);
+                    float outY = y * (0.1f / 1000.0f);
+
+                    Ray ray = new Ray(new Vector3(x * 0.1f, y * 0.1f, 0.1f), new Vector3(x *0.1f, y*0.1f, 1000.0f));
 
                     HashSet<RayCollision> rcs = new HashSet<RayCollision>();
 
@@ -66,11 +69,29 @@ namespace BasicRayTrace.tracer
                     RayCollision closestRay = (from RayCollision r in rcs
                                      orderby Vector3.Distance(r.Position, ray.Start) ascending
                                      select r).First();
-                    output[x, y] = closestRay.Obj.Color;
+                    output[x, y] = TestLighting(closestRay.Position, closestRay.Obj.CalculateNormal(closestRay.Position), new Vector3(320, 320, -400.0f), closestRay.Obj.Color);
                 }
             }
 
             return output;
+        }
+
+        private Vector3 TestLighting(Vector3 position, Vector3 normal, Vector3 lightPos, Vector3 color)
+        {
+            Vector3 litColor = ((position - lightPos).Normalize() * normal) * color;
+
+            Ray shadowRay = new Ray(position, lightPos);
+            
+            foreach (ILightableObject o in scene.Objects) 
+            {
+                RayCollision rc = o.RayCollision(shadowRay);
+                if (rc.IsCollision)
+                {
+                    return new Vector3(1,0,0);
+                }
+            }
+
+            return litColor;
         }
         
     }

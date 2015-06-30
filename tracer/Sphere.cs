@@ -51,6 +51,11 @@ namespace BasicRayTrace.tracer
             return new RayCollision(true, position, this); //Collision
         }
 
+        public Vector3 CalculateNormal(Vector3 point)
+        {
+            return (position - point).Normalize();
+        }
+
         public Vector3 Color
         {
             get

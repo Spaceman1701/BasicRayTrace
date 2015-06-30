@@ -23,5 +23,7 @@ namespace BasicRayTrace.tracer
         RayCollision RayCollision(Ray ray);
 
         Vector3 CalculateAngleOfReflection(Ray ray, RayCollision collision);
+
+        Vector3 CalculateNormal(Vector3 point);
     }
 }
